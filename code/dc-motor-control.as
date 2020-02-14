@@ -187,13 +187,21 @@ EECON1 equ 018Ch ;#
 # 3544 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h"
 EECON2 equ 018Dh ;# 
 	FNROOT	_main
-	global	_global4
-	global	_PORTB
-_PORTB	set	0x6
-	global	_TRISB
-_TRISB	set	0x86
-	global	_ANSELH
-_ANSELH	set	0x189
+	global	_valor
+	global	_ADRESH
+_ADRESH	set	0x1E
+	global	_ADCON0
+_ADCON0	set	0x1F
+	global	_ADRESL
+_ADRESL	set	0x9E
+	global	_TRISC
+_TRISC	set	0x87
+	global	_TRISD
+_TRISD	set	0x88
+	global	_ADCON1
+_ADCON1	set	0x9F
+	global	_TRISA
+_TRISA	set	0x85
 	global	_ANSEL
 _ANSEL	set	0x188
 ; #config settings
@@ -208,17 +216,8 @@ __initialization:
 psect	bssCOMMON,class=COMMON,space=1,noexec
 global __pbssCOMMON
 __pbssCOMMON:
-_global1:
+_valor:
        ds      2
-
-_global3:
-       ds      2
-
-_global4:
-       ds      1
-
-_global2:
-       ds      1
 
 	file	"dc-motor-control.as"
 	line	#
@@ -226,10 +225,6 @@ _global2:
 psect cinit,class=CODE,delta=2,merge=1
 	clrf	((__pbssCOMMON)+0)&07Fh
 	clrf	((__pbssCOMMON)+1)&07Fh
-	clrf	((__pbssCOMMON)+2)&07Fh
-	clrf	((__pbssCOMMON)+3)&07Fh
-	clrf	((__pbssCOMMON)+4)&07Fh
-	clrf	((__pbssCOMMON)+5)&07Fh
 psect cinit,class=CODE,delta=2,merge=1
 global end_of_initialization,__end_of__initialization
 
@@ -244,19 +239,19 @@ global __pcstackCOMMON
 __pcstackCOMMON:
 ?_main:	; 1 bytes @ 0x0
 ??_main:	; 1 bytes @ 0x0
-	ds	3
+	ds	1
 ;!
 ;!Data Sizes:
 ;!    Strings     0
 ;!    Constant    0
 ;!    Data        0
-;!    BSS         6
+;!    BSS         2
 ;!    Persistent  0
 ;!    Stack       0
 ;!
 ;!Auto Spaces:
 ;!    Space          Size  Autos    Used
-;!    COMMON           14      3       9
+;!    COMMON           14      1       3
 ;!    BANK0            80      0       0
 ;!    BANK1            80      0       0
 ;!    BANK3            96      0       0
@@ -290,7 +285,7 @@ __pcstackCOMMON:
 ;!    None.
 
 ;;
-;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
 ;;
 
 ;!
@@ -299,8 +294,8 @@ __pcstackCOMMON:
 ;! ---------------------------------------------------------------------------------
 ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;! ---------------------------------------------------------------------------------
-;! (0) _main                                                 3     3      0       0
-;!                                              0 COMMON     3     3      0
+;! (0) _main                                                 1     1      0       0
+;!                                              0 COMMON     1     1      0
 ;! ---------------------------------------------------------------------------------
 ;! Estimated maximum stack depth 0
 ;! ---------------------------------------------------------------------------------
@@ -317,13 +312,13 @@ __pcstackCOMMON:
 ;!EEDATA             100      0       0       0        0.0%
 ;!NULL                 0      0       0       0        0.0%
 ;!CODE                 0      0       0       0        0.0%
-;!COMMON               E      3       9       1       64.3%
+;!COMMON               E      1       3       1       21.4%
 ;!BITSFR0              0      0       0       1        0.0%
 ;!SFR0                 0      0       0       1        0.0%
 ;!BITSFR1              0      0       0       2        0.0%
 ;!SFR1                 0      0       0       2        0.0%
 ;!STACK                0      0       0       2        0.0%
-;!ABS                  0      0       9       3        0.0%
+;!ABS                  0      0       3       3        0.0%
 ;!BITBANK0            50      0       0       4        0.0%
 ;!BITSFR3              0      0       0       4        0.0%
 ;!SFR3                 0      0       0       4        0.0%
@@ -336,13 +331,13 @@ __pcstackCOMMON:
 ;!BANK3               60      0       0       9        0.0%
 ;!BITBANK2            60      0       0      10        0.0%
 ;!BANK2               60      0       0      11        0.0%
-;!DATA                 0      0       9      12        0.0%
+;!DATA                 0      0       3      12        0.0%
 
 	global	_main
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 12 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+;;		line 8 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -358,9 +353,9 @@ __pcstackCOMMON:
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0
 ;;      Locals:         0       0       0       0       0
-;;      Temps:          3       0       0       0       0
-;;      Totals:         3       0       0       0       0
-;;Total ram usage:        3 bytes
+;;      Temps:          1       0       0       0       0
+;;      Totals:         1       0       0       0       0
+;;Total ram usage:        1 bytes
 ;; This function calls:
 ;;		Nothing
 ;; This function is called by:
@@ -369,12 +364,12 @@ __pcstackCOMMON:
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1,group=0
 	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
-	line	12
+	line	8
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
 	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
-	line	12
+	line	8
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
 	
@@ -382,75 +377,116 @@ _main:
 ;incstack = 0
 	opt	stack 8
 ; Regs used in _main: [wreg+status,2+status,0]
-	line	13
+	line	11
 	
-l486:	
-;main.c: 13: TRISB = 0x00;
+l489:	
+;main.c: 11: TRISA |= (1<<0);
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
-	clrf	(134)^080h	;volatile
-	line	14
-;main.c: 14: ANSEL = 0;
+	bsf	(133)^080h+(0/8),(0)&7	;volatile
+	line	12
+;main.c: 12: ANSEL |= (1<<0);
 	bsf	status, 5	;RP0=1, select bank3
 	bsf	status, 6	;RP1=1, select bank3
-	clrf	(392)^0180h	;volatile
-	line	15
-;main.c: 15: ANSELH = 0;
-	clrf	(393)^0180h	;volatile
-	goto	l488
-	line	17
-;main.c: 17: while(1){
+	bsf	(392)^0180h+(0/8),(0)&7	;volatile
+	line	14
 	
-l23:	
-	line	18
-	
-l488:	
-;main.c: 18: PORTB = global4;
-	movf	(_global4),w
+l491:	
+;main.c: 14: ADCON0 = 0x00;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
-	movwf	(6)	;volatile
-	line	19
+	clrf	(31)	;volatile
+	line	15
 	
-l490:	
-;main.c: 19: global4++;
-	movlw	low(01h)
+l493:	
+;main.c: 15: ADCON0 |= 0b01000001;
+	movlw	low(041h)
 	movwf	(??_main+0)+0
 	movf	(??_main+0)+0,w
-	addwf	(_global4),f
+	iorwf	(31),f	;volatile
+	line	17
+	
+l495:	
+;main.c: 17: ADCON1 = 0;
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	clrf	(159)^080h	;volatile
+	line	18
+	
+l497:	
+;main.c: 18: ADCON1 |= (1<<7);
+	bsf	(159)^080h+(7/8),(7)&7	;volatile
+	line	19
+	
+l499:	
+;main.c: 19: TRISD = 0;
+	clrf	(136)^080h	;volatile
 	line	20
 	
-l492:	
-;main.c: 20: _delay((unsigned long)((1000)*(4000000/4000.0)));
-	opt asmopt_push
-opt asmopt_off
-movlw  6
-movwf	((??_main+0)+0+2),f
-movlw	19
-movwf	((??_main+0)+0+1),f
-	movlw	173
-movwf	((??_main+0)+0),f
-	u17:
-decfsz	((??_main+0)+0),f
-	goto	u17
-	decfsz	((??_main+0)+0+1),f
-	goto	u17
-	decfsz	((??_main+0)+0+2),f
-	goto	u17
-	nop2
-opt asmopt_pop
-
-	goto	l488
-	line	21
+l501:	
+;main.c: 20: TRISC = 0;
+	clrf	(135)^080h	;volatile
+	goto	l503
+	line	23
+;main.c: 23: while(1){
 	
-l24:	
-	line	17
-	goto	l488
+l23:	
+	line	25
+	
+l503:	
+;main.c: 25: ADCON0 |= (1<<1);
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	bsf	(31)+(1/8),(1)&7	;volatile
+	line	26
+;main.c: 26: while( ADCON0 & (1<<1));
+	goto	l24
 	
 l25:	
-	line	22
+	
+l24:	
+	btfsc	(31),(1)&7	;volatile
+	goto	u11
+	goto	u10
+u11:
+	goto	l24
+u10:
+	goto	l505
 	
 l26:	
+	line	27
+	
+l505:	
+;main.c: 27: valor = (ADRESH<<8) + ADRESL;
+	movf	(30),w	;volatile
+	movwf	(_valor+1)
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	movf	(158)^080h,w	;volatile
+	movwf	(_valor)
+	line	28
+;main.c: 28: TRISC = ADRESL;
+	movf	(158)^080h,w	;volatile
+	movwf	(135)^080h	;volatile
+	line	29
+;main.c: 29: TRISD = ADRESH;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(30),w	;volatile
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	movwf	(136)^080h	;volatile
+	goto	l503
+	line	33
+	
+l27:	
+	line	23
+	goto	l503
+	
+l28:	
+	line	34
+	
+l29:	
 	global	start
 	ljmp	start
 	opt stack 0

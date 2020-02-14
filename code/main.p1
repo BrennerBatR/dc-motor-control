@@ -1,17 +1,21 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"1476 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
-[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
+"1414 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
 "3385
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
-"3447
-[v _ANSELH `Vuc ~T0 @X0 0 e@393 ]
-"226
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-[v F1637 `(v ~T0 @X0 1 tf1`ul ]
-"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
-[v __delay `JF1637 ~T0 @X0 0 e ]
-[p i __delay ]
+"1243
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"2975
+[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
+"1600
+[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
+"1538
+[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"1236
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"2968
+[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1524,67 +1528,74 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-"6 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-[v _global2 `c ~T0 @X0 1 e ]
-[i _global2
--> -> 0 `i `c
+"5 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+[v _valor `ui ~T0 @X0 1 e ]
+[i _valor
+-> -> 0 `i `ui
 ]
-[; ;main.c: 6: int8_t global2 = 0;
-"7
-[v _global3 `i ~T0 @X0 1 e ]
-[i _global3
--> 0 `i
-]
-[; ;main.c: 7: int16_t global3 = 0;
-"8
-[v _global4 `uc ~T0 @X0 1 e ]
-[i _global4
--> -> 0 `i `uc
-]
-[; ;main.c: 8: uint8_t global4 = 0;
-"9
-[v _global1 `i ~T0 @X0 1 e ]
-[i _global1
--> 0 `i
-]
-[; ;main.c: 9: int global1 = 0;
+[; ;main.c: 5: uint16_t valor = 0;
 [v $root$_main `(v ~T0 @X0 0 e ]
-"12
+"8
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 12: void main(void) {
+[; ;main.c: 8: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 13: TRISB = 0x00;
-"13
-[e = _TRISB -> -> 0 `i `uc ]
-[; ;main.c: 14: ANSEL = 0;
+[; ;main.c: 11: TRISA |= (1<<0);
+"11
+[e =| _TRISA -> << -> 1 `i -> 0 `i `uc ]
+[; ;main.c: 12: ANSEL |= (1<<0);
+"12
+[e =| _ANSEL -> << -> 1 `i -> 0 `i `uc ]
+[; ;main.c: 14: ADCON0 = 0x00;
 "14
-[e = _ANSEL -> -> 0 `i `uc ]
-[; ;main.c: 15: ANSELH = 0;
+[e = _ADCON0 -> -> 0 `i `uc ]
+[; ;main.c: 15: ADCON0 |= 0b01000001;
 "15
-[e = _ANSELH -> -> 0 `i `uc ]
-[; ;main.c: 17: while(1){
+[e =| _ADCON0 -> -> 65 `i `uc ]
+[; ;main.c: 17: ADCON1 = 0;
 "17
+[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;main.c: 18: ADCON1 |= (1<<7);
+"18
+[e =| _ADCON1 -> << -> 1 `i -> 7 `i `uc ]
+[; ;main.c: 19: TRISD = 0;
+"19
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 20: TRISC = 0;
+"20
+[e = _TRISC -> -> 0 `i `uc ]
+[; ;main.c: 23: while(1){
+"23
 [e :U 140 ]
 {
-[; ;main.c: 18: PORTB = global4;
-"18
-[e = _PORTB _global4 ]
-[; ;main.c: 19: global4++;
-"19
-[e ++ _global4 -> -> 1 `i `uc ]
-[; ;main.c: 20: _delay((unsigned long)((1000)*(4000000/4000.0)));
-"20
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"21
+[; ;main.c: 25: ADCON0 |= (1<<1);
+"25
+[e =| _ADCON0 -> << -> 1 `i -> 1 `i `uc ]
+[; ;main.c: 26: while( ADCON0 & (1<<1));
+"26
+[e $U 142  ]
+[e :U 143 ]
+[e :U 142 ]
+[e $ != & -> _ADCON0 `i << -> 1 `i -> 1 `i -> 0 `i 143  ]
+[e :U 144 ]
+[; ;main.c: 27: valor = (ADRESH<<8) + ADRESL;
+"27
+[e = _valor -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
+[; ;main.c: 28: TRISC = ADRESL;
+"28
+[e = _TRISC _ADRESL ]
+[; ;main.c: 29: TRISD = ADRESH;
+"29
+[e = _TRISD _ADRESH ]
+"33
 }
 [e :U 139 ]
-"17
+"23
 [e $U 140  ]
 [e :U 141 ]
-[; ;main.c: 21: }
-[; ;main.c: 22: }
-"22
+[; ;main.c: 33: }
+[; ;main.c: 34: }
+"34
 [e :UE 138 ]
 }
