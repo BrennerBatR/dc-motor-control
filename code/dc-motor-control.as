@@ -239,7 +239,7 @@ global __pcstackCOMMON
 __pcstackCOMMON:
 ?_main:	; 1 bytes @ 0x0
 ??_main:	; 1 bytes @ 0x0
-	ds	1
+	ds	2
 ;!
 ;!Data Sizes:
 ;!    Strings     0
@@ -251,7 +251,7 @@ __pcstackCOMMON:
 ;!
 ;!Auto Spaces:
 ;!    Space          Size  Autos    Used
-;!    COMMON           14      1       3
+;!    COMMON           14      2       4
 ;!    BANK0            80      0       0
 ;!    BANK1            80      0       0
 ;!    BANK3            96      0       0
@@ -285,7 +285,7 @@ __pcstackCOMMON:
 ;!    None.
 
 ;;
-;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
 ;;
 
 ;!
@@ -294,8 +294,8 @@ __pcstackCOMMON:
 ;! ---------------------------------------------------------------------------------
 ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;! ---------------------------------------------------------------------------------
-;! (0) _main                                                 1     1      0       0
-;!                                              0 COMMON     1     1      0
+;! (0) _main                                                 2     2      0       0
+;!                                              0 COMMON     2     2      0
 ;! ---------------------------------------------------------------------------------
 ;! Estimated maximum stack depth 0
 ;! ---------------------------------------------------------------------------------
@@ -312,13 +312,13 @@ __pcstackCOMMON:
 ;!EEDATA             100      0       0       0        0.0%
 ;!NULL                 0      0       0       0        0.0%
 ;!CODE                 0      0       0       0        0.0%
-;!COMMON               E      1       3       1       21.4%
+;!COMMON               E      2       4       1       28.6%
 ;!BITSFR0              0      0       0       1        0.0%
 ;!SFR0                 0      0       0       1        0.0%
 ;!BITSFR1              0      0       0       2        0.0%
 ;!SFR1                 0      0       0       2        0.0%
 ;!STACK                0      0       0       2        0.0%
-;!ABS                  0      0       3       3        0.0%
+;!ABS                  0      0       4       3        0.0%
 ;!BITBANK0            50      0       0       4        0.0%
 ;!BITSFR3              0      0       0       4        0.0%
 ;!SFR3                 0      0       0       4        0.0%
@@ -331,13 +331,13 @@ __pcstackCOMMON:
 ;!BANK3               60      0       0       9        0.0%
 ;!BITBANK2            60      0       0      10        0.0%
 ;!BANK2               60      0       0      11        0.0%
-;!DATA                 0      0       3      12        0.0%
+;!DATA                 0      0       4      12        0.0%
 
 	global	_main
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 8 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+;;		line 8 in file "D:\UNIFEI\dc-motor-control\code\main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -353,9 +353,9 @@ __pcstackCOMMON:
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0
 ;;      Locals:         0       0       0       0       0
-;;      Temps:          1       0       0       0       0
-;;      Totals:         1       0       0       0       0
-;;Total ram usage:        1 bytes
+;;      Temps:          2       0       0       0       0
+;;      Totals:         2       0       0       0       0
+;;Total ram usage:        2 bytes
 ;; This function calls:
 ;;		Nothing
 ;; This function is called by:
@@ -363,12 +363,12 @@ __pcstackCOMMON:
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1,group=0
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+	file	"D:\UNIFEI\dc-motor-control\code\main.c"
 	line	8
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+	file	"D:\UNIFEI\dc-motor-control\code\main.c"
 	line	8
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -379,7 +379,7 @@ _main:
 ; Regs used in _main: [wreg+status,2+status,0]
 	line	11
 	
-l489:	
+l491:	
 ;main.c: 11: TRISA |= (1<<0);
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
@@ -391,14 +391,14 @@ l489:
 	bsf	(392)^0180h+(0/8),(0)&7	;volatile
 	line	14
 	
-l491:	
+l493:	
 ;main.c: 14: ADCON0 = 0x00;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(31)	;volatile
 	line	15
 	
-l493:	
+l495:	
 ;main.c: 15: ADCON0 |= 0b01000001;
 	movlw	low(041h)
 	movwf	(??_main+0)+0
@@ -406,57 +406,75 @@ l493:
 	iorwf	(31),f	;volatile
 	line	17
 	
-l495:	
+l497:	
 ;main.c: 17: ADCON1 = 0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(159)^080h	;volatile
 	line	18
 	
-l497:	
+l499:	
 ;main.c: 18: ADCON1 |= (1<<7);
 	bsf	(159)^080h+(7/8),(7)&7	;volatile
 	line	19
 	
-l499:	
+l501:	
 ;main.c: 19: TRISD = 0;
 	clrf	(136)^080h	;volatile
 	line	20
 	
-l501:	
+l503:	
 ;main.c: 20: TRISC = 0;
 	clrf	(135)^080h	;volatile
-	goto	l503
+	line	21
+	
+l505:	
+;main.c: 21: _delay((unsigned long)((20)*(4000000/4000.0)));
+	opt asmopt_push
+opt asmopt_off
+movlw	26
+movwf	((??_main+0)+0+1),f
+	movlw	248
+movwf	((??_main+0)+0),f
+	u27:
+decfsz	((??_main+0)+0),f
+	goto	u27
+	decfsz	((??_main+0)+0+1),f
+	goto	u27
+	nop
+opt asmopt_pop
+
+	goto	l507
 	line	23
 ;main.c: 23: while(1){
 	
-l23:	
+l25:	
 	line	25
 	
-l503:	
+l507:	
 ;main.c: 25: ADCON0 |= (1<<1);
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(31)+(1/8),(1)&7	;volatile
 	line	26
 ;main.c: 26: while( ADCON0 & (1<<1));
-	goto	l24
+	goto	l26
 	
-l25:	
+l27:	
 	
-l24:	
+l26:	
 	btfsc	(31),(1)&7	;volatile
 	goto	u11
 	goto	u10
 u11:
-	goto	l24
+	goto	l26
 u10:
-	goto	l505
+	goto	l509
 	
-l26:	
+l28:	
 	line	27
 	
-l505:	
+l509:	
 ;main.c: 27: valor = (ADRESH<<8) + ADRESL;
 	movf	(30),w	;volatile
 	movwf	(_valor+1)
@@ -476,17 +494,17 @@ l505:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(136)^080h	;volatile
-	goto	l503
+	goto	l507
 	line	33
 	
-l27:	
+l29:	
 	line	23
-	goto	l503
+	goto	l507
 	
-l28:	
+l30:	
 	line	34
 	
-l29:	
+l31:	
 	global	start
 	ljmp	start
 	opt stack 0

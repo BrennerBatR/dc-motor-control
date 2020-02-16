@@ -13,8 +13,8 @@
 %PSECTS
 $dc-motor-control.obj
 cinit CODE 0 7FA 7FA 6 2
-maintext CODE 0 7D3 7D3 27 2
-cstackCOMMON COMMON 1 72 72 1 1
+maintext CODE 0 7CA 7CA 30 2
+cstackCOMMON COMMON 1 72 72 2 1
 bssCOMMON COMMON 1 70 70 2 1
 $startup.obj
 end_init CODE 0 0 0 3 2
@@ -32,24 +32,24 @@ BANK0 20-6F 1
 BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
-CONST 3-7D2 2
+CONST 3-7C9 2
 CONST 800-1FFF 2
-ENTRY 3-7D2 2
+ENTRY 3-7C9 2
 ENTRY 800-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
-CODE 3-7D2 2
+CODE 3-7C9 2
 CODE 800-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-10F 1
 SFR3 180-18F 1
-COMMON 73-7D 1
+COMMON 74-7D 1
 CONFIG 2007-2008 2
 EEDATA 2100-21FF 2
-STRCODE 3-7D2 2
+STRCODE 3-7C9 2
 STRCODE 800-1FFF 2
-STRING 3-7D2 2
+STRING 3-7C9 2
 STRING 800-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -65,38 +65,39 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dc-motor-control.obj
-7FA cinit CODE >204:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FA cinit CODE >207:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FA cinit CODE >218:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FB cinit CODE >219:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FC cinit CODE >225:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FC cinit CODE >227:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7FD cinit CODE >228:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\dc-motor-control.as
-7D3 maintext CODE >8:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7D3 maintext CODE >11:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7D6 maintext CODE >12:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7D9 maintext CODE >14:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7DC maintext CODE >15:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E0 maintext CODE >17:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E3 maintext CODE >18:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E4 maintext CODE >19:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E5 maintext CODE >20:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E6 maintext CODE >25:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7E9 maintext CODE >26:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7EB maintext CODE >27:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7F1 maintext CODE >28:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7F3 maintext CODE >29:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
-7F9 maintext CODE >23:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+7FA cinit CODE >204:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FA cinit CODE >207:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FA cinit CODE >218:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FB cinit CODE >219:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FC cinit CODE >225:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FC cinit CODE >227:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7FD cinit CODE >228:D:\UNIFEI\dc-motor-control\code\dc-motor-control.as
+7CA maintext CODE >8:D:\UNIFEI\dc-motor-control\code\main.c
+7CA maintext CODE >11:D:\UNIFEI\dc-motor-control\code\main.c
+7CD maintext CODE >12:D:\UNIFEI\dc-motor-control\code\main.c
+7D0 maintext CODE >14:D:\UNIFEI\dc-motor-control\code\main.c
+7D3 maintext CODE >15:D:\UNIFEI\dc-motor-control\code\main.c
+7D7 maintext CODE >17:D:\UNIFEI\dc-motor-control\code\main.c
+7DA maintext CODE >18:D:\UNIFEI\dc-motor-control\code\main.c
+7DB maintext CODE >19:D:\UNIFEI\dc-motor-control\code\main.c
+7DC maintext CODE >20:D:\UNIFEI\dc-motor-control\code\main.c
+7DD maintext CODE >21:D:\UNIFEI\dc-motor-control\code\main.c
+7E6 maintext CODE >25:D:\UNIFEI\dc-motor-control\code\main.c
+7E9 maintext CODE >26:D:\UNIFEI\dc-motor-control\code\main.c
+7EB maintext CODE >27:D:\UNIFEI\dc-motor-control\code\main.c
+7F1 maintext CODE >28:D:\UNIFEI\dc-motor-control\code\main.c
+7F3 maintext CODE >29:D:\UNIFEI\dc-motor-control\code\main.c
+7F9 maintext CODE >23:D:\UNIFEI\dc-motor-control\code\main.c
 $startup.obj
-0 end_init CODE >73:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 init CODE >70:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >40:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >41:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >42:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >43:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >44:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 functab ENTRY >45:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
-0 reset_vec CODE >64:C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\startup.as
+0 end_init CODE >73:D:\UNIFEI\dc-motor-control\code\startup.as
+0 init CODE >70:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >40:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >41:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >42:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >43:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >44:D:\UNIFEI\dc-motor-control\code\startup.as
+0 functab ENTRY >45:D:\UNIFEI\dc-motor-control\code\startup.as
+0 reset_vec CODE >64:D:\UNIFEI\dc-motor-control\code\startup.as
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -111,13 +112,13 @@ $startup.obj
 %SYMTAB
 ___latbits 2 0 ABS 0 - dc-motor-control.obj
 __Hspace_0 800 0 ABS 0 - -
-__Hspace_1 73 0 ABS 0 - -
+__Hspace_1 74 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 ___sp 0 0 STACK 2 stack startup.obj
-_main FA6 0 CODE 0 maintext dc-motor-control.obj
+_main F94 0 CODE 0 maintext dc-motor-control.obj
 btemp 7E 0 ABS 0 - dc-motor-control.obj
 start 0 0 CODE 0 init startup.obj
 __size_of_main 0 0 ABS 0 - dc-motor-control.obj
@@ -175,12 +176,12 @@ __Lsfr3 0 0 ABS 0 sfr3 -
 __Ltext 0 0 ABS 0 text -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 __S0 800 0 ABS 0 - -
-__S1 73 0 ABS 0 - -
+__S1 74 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 __Lintentry 0 0 CODE 0 intentry -
 reset_vec 0 0 CODE 0 reset_vec startup.obj
-__pmaintext FA6 0 CODE 0 maintext dc-motor-control.obj
+__pmaintext F94 0 CODE 0 maintext dc-motor-control.obj
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 0 config -
 stackhi 0 0 ABS 0 - startup.obj
@@ -239,6 +240,6 @@ __initialization FF4 0 CODE 0 cinit dc-motor-control.obj
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cinit 0 7FA FF4 6 2
-maintext 0 7D3 FA6 27 2
+maintext 0 7CA F94 30 2
 reset_vec 0 0 0 3 2
-bssCOMMON 1 70 70 3 1
+bssCOMMON 1 70 70 4 1

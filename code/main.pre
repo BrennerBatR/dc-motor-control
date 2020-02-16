@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+# 1 "D:\UNIFEI\dc-motor-control\code\main.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -2204,7 +2204,7 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 5 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+# 5 "D:\UNIFEI\dc-motor-control\code\main.c"
 uint16_t valor = 0;
 
 
@@ -2221,7 +2221,7 @@ ADCON1 = 0;
 ADCON1 |= (1<<7);
 TRISD = 0;
 TRISC = 0;
-
+_delay((unsigned long)((20)*(4000000/4000.0)));
 
 while(1){
 

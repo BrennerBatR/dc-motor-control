@@ -11,7 +11,7 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"8 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"8 D:\UNIFEI\dc-motor-control\code\main.c
 [v _main main `(v  1 e 1 0 ]
 "1236 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
@@ -29,7 +29,7 @@
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
 "3385
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
-"5 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"5 D:\UNIFEI\dc-motor-control\code\main.c
 [v _valor valor `ui  1 e 2 0 ]
 "8
 [v _main main `(v  1 e 1 0 ]

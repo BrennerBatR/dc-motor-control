@@ -12,7 +12,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
 "1538
 [v _TRISC `Vuc ~T0 @X0 0 e@135 ]
-"1236
+[v F1637 `(v ~T0 @X0 1 tf1`ul ]
+"153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
+[v __delay `JF1637 ~T0 @X0 0 e ]
+[p i __delay ]
+"1236 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
 [v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
 "2968
 [v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
@@ -1528,7 +1532,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-"5 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"5 D:\UNIFEI\dc-motor-control\code\main.c
 [v _valor `ui ~T0 @X0 1 e ]
 [i _valor
 -> -> 0 `i `ui
@@ -1565,6 +1569,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 20: TRISC = 0;
 "20
 [e = _TRISC -> -> 0 `i `uc ]
+[; ;main.c: 21: _delay((unsigned long)((20)*(4000000/4000.0)));
+"21
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 [; ;main.c: 23: while(1){
 "23
 [e :U 140 ]

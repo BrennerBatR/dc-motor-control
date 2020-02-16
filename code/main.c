@@ -18,7 +18,7 @@ void main(void) {
 	ADCON1 |= (1<<7); 
 	TRISD	= 0;
 	TRISC	= 0;
-
+    __delay_ms(20);
 	
 	while(1){
 		// loop infinito
