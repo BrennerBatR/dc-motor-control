@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+# 1 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -2212,47 +2212,63 @@ uint8_t lcd_data(uint8_t data);
 uint8_t lcd_set_position(uint8_t x, uint8_t y);
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
 
-# 6 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
-uint16_t valor = 0;
-float valor_f = 0;
+# 3 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+uint8_t lcd_init(void)
+{
+_delay((unsigned long)((40)*(4000000/4000.0)));
+TRISB = 0x00;
+ANSELH = 0x00;
+lcd_cmd(0x02);
+lcd_cmd(0x02);
+lcd_cmd(0x00);
+lcd_cmd(0x00);
+lcd_cmd(0x0C);
+lcd_cmd(0x00);
+lcd_cmd(0x06);
 
-
-void main(void) {
-
-
-TRISA |= (1<<0);
-ANSEL |= (1<<0);
-
-ADCON0 = 0x00;
-ADCON0 |= 0b01000001;
-
-ADCON1 = 0;
-ADCON1 |= (1<<7);
-TRISD = 0;
-TRISC = 0;
-_delay((unsigned long)((20)*(4000000/4000.0)));
-lcd_init();
-lcd_data(0x30);
-lcd_data(0x33);
-lcd_data(0x32);
-lcd_data(0x31);
-lcd_data('0');
-lcd_data('3');
-lcd_data('2');
-lcd_data('1');
-lcd_data('A');
-
-while(1){
-
-ADCON0 |= (1<<1);
-while( ADCON0 & (1<<1));
-valor = (ADRESH<<8) + ADRESL;
-valor = valor*5;
-if (valor > 2000){
-PORTD |= (1<<0);
-} else {
-PORTD &= ~(1<<0);
+# 31
+return 0;
 }
-_delay((unsigned long)((5)*(4000000/4000000.0)));
+
+uint8_t lcd_clear(void);
+
+uint8_t lcd_cmd(uint8_t cmd)
+{
+PORTB = cmd;
+PORTB &= ~(1<<4);
+PORTB |= (1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+PORTB &= ~(1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+return 0;
+
+
 }
+uint8_t lcd_data(uint8_t data)
+{
+uint8_t high_nibble;
+uint8_t low_nibble;
+
+high_nibble = data >> 4;
+high_nibble &= 0x0F;
+
+low_nibble = data & 0x0F;
+PORTB = high_nibble;
+PORTB |= (1<<4);
+PORTB |= (1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+PORTB &= ~(1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+
+PORTB = low_nibble;
+PORTB |= (1<<4);
+PORTB |= (1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+PORTB &= ~(1<<5);
+_delay((unsigned long)((2)*(4000000/4000.0)));
+
+return 0;
+
 }
+uint8_t lcd_set_position(uint8_t x, uint8_t y);
+uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);

@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC Macro Assembler V1.45 build -152302408 
-                                                                                                           Sun Feb 16 09:37:13 2020
+                                                                                                           Mon Feb 17 10:59:50 2020
 
 
      1                           
@@ -14,10 +14,10 @@ Microchip Technology PIC Macro Assembler V1.45 build -152302408
      8                           	; Compiler options:
      9                           	;
     10                           	; -odc-motor-control.cof -mdc-motor-control.map --summary=default \
-    11                           	; --output=default main.p1 --chip=16F887 -P --runtime=default \
-    12                           	; --opt=default -N-1 -D__DEBUG=1 -g --asmlist \
-    13                           	; --errformat=Error   [%n] %f; %l.%c %s --msgformat=Advisory[%n] %s \
-    14                           	; --warnformat=Warning [%n] %f; %l.%c %s
+    11                           	; --output=default main.p1 lcd.p1 --chip=16F887 -P --runtime=default \
+    12                           	; --opt=default,+asm,-debug,-speed,+space,9 --warn=0 -N255 -D__DEBUG=1 \
+    13                           	; --addrqual=ignore -g --asmlist --errformat=Error   [%n] %f; %l.%c %s \
+    14                           	; --msgformat=Advisory[%n] %s --warnformat=Warning [%n] %f; %l.%c %s
     15                           	;
     16                           
     17                           
@@ -76,13 +76,13 @@ Microchip Technology PIC Macro Assembler V1.45 build -152302408
     70  0000                     	psect	end_init
     71                           	global start_initialization
     72                           	ljmp start_initialization	;jump to C runtime clear & initialization
-    73  0000  120A  118A  2FFA   
+    73  0000  120A  118A  2FF7   
 
 
 Microchip Technology PIC Macro Assembler V1.45 build -152302408 
-Symbol Table                                                                                               Sun Feb 16 09:37:13 2020
+Symbol Table                                                                                               Mon Feb 17 10:59:50 2020
 
-               ___sp 0000                 _main 07CA                 start 0000               stackhi 0000  
-             stacklo 0000  start_initialization 07FA             ___int_sp 0000             intlevel0 0000  
+               ___sp 0000                 _main 076F                 start 0000               stackhi 0000  
+             stacklo 0000  start_initialization 07F7             ___int_sp 0000             intlevel0 0000  
            intlevel1 0000             intlevel2 0000             intlevel3 0000             intlevel4 0000  
            intlevel5 0000             reset_vec 0000  
