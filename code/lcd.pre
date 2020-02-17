@@ -2212,7 +2212,8 @@ uint8_t lcd_data(uint8_t data);
 uint8_t lcd_set_position(uint8_t x, uint8_t y);
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
 
-# 3 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+# 2 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+uint8_t pos = 0;
 uint8_t lcd_init(void)
 {
 _delay((unsigned long)((40)*(4000000/4000.0)));
@@ -2226,7 +2227,6 @@ lcd_cmd(0x0C);
 lcd_cmd(0x00);
 lcd_cmd(0x06);
 
-# 31
 return 0;
 }
 
@@ -2270,5 +2270,22 @@ _delay((unsigned long)((2)*(4000000/4000.0)));
 return 0;
 
 }
-uint8_t lcd_set_position(uint8_t x, uint8_t y);
+uint8_t lcd_set_position(uint8_t x, uint8_t y)
+{
+uint8_t pos = 0;
+if ( x == 0 ){
+pos = y;
+pos |= (1<<7);
+lcd_cmd((pos>>4)&0x0F);
+lcd_cmd(pos & 0x0F);
+} else {
+pos = y;
+pos | = (0xC0);
+lcd_cmd((pos>>4)&0x0F);
+lcd_cmd(pos & 0x0F);
+}
+return 0;
+
+}
+
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);

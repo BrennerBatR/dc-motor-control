@@ -1,5 +1,5 @@
 #include "lcd.h"
-
+uint8_t pos = 0;
 uint8_t lcd_init(void)
 {
 	__delay_ms(40);
@@ -56,5 +56,22 @@ uint8_t lcd_data(uint8_t data)
 	return 0;
 	
 }
-uint8_t lcd_set_position(uint8_t x, uint8_t y);
+uint8_t lcd_set_position(uint8_t x, uint8_t y)
+{
+	uint8_t pos = 0;
+	if ( x == 0 ){
+		pos = y;
+		pos |= (1<<7);
+		lcd_cmd((pos>>4)&0x0F);
+		lcd_cmd(pos & 0x0F);
+	} else {
+		pos = y;
+		pos | = (0xC0);
+		lcd_cmd((pos>>4)&0x0F);
+		lcd_cmd(pos & 0x0F);
+	}
+	return 0;
+	
+}
+
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);

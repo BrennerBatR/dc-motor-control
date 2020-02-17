@@ -23,13 +23,8 @@ void main(void) {
     __delay_ms(20);
     lcd_init();
     lcd_data(0x30);
-    lcd_data(0x33);
-    lcd_data(0x32);
-    lcd_data(0x31);
-    lcd_data('0');
-    lcd_data('3');
-    lcd_data('2');
-    lcd_data('1');
+
+    lcd_set_position(0,15);
     lcd_data('A');
 	
 	while(1){
