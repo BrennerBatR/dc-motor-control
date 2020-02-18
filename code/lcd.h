@@ -13,5 +13,6 @@ uint8_t lcd_cmd(uint8_t cmd);
 uint8_t lcd_data(uint8_t data);
 uint8_t lcd_set_position(uint8_t x, uint8_t y);
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
+uint8_t lcd_tensao(uint16_t tensao);
 
 

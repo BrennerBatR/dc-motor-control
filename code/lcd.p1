@@ -1529,6 +1529,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 13: uint8_t lcd_data(uint8_t data);
 [; ;lcd.h: 14: uint8_t lcd_set_position(uint8_t x, uint8_t y);
 [; ;lcd.h: 15: uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
+[; ;lcd.h: 16: uint8_t lcd_tensao(uint16_t tensao);
 "2 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
 [v _pos `uc ~T0 @X0 1 e ]
 [i _pos
@@ -1752,3 +1753,76 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 141 ]
 }
 [; ;lcd.c: 77: uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
+"80
+[v _lcd_tensao `(uc ~T0 @X0 1 ef1`ui ]
+{
+[; ;lcd.c: 80: uint8_t lcd_tensao(uint16_t tensao){
+[e :U _lcd_tensao ]
+[v _tensao `ui ~T0 @X0 1 r1 ]
+[f ]
+"81
+[v _milhar `ui ~T0 @X0 1 a ]
+[; ;lcd.c: 81: uint16_t milhar = tensao/1000;
+[e = _milhar / _tensao -> -> 1000 `i `ui ]
+"82
+[v _centena `ui ~T0 @X0 1 a ]
+[; ;lcd.c: 82: uint16_t centena = (tensao%1000);
+[e = _centena % _tensao -> -> 1000 `i `ui ]
+[; ;lcd.c: 83: centena = centena/100;
+"83
+[e = _centena / _centena -> -> 100 `i `ui ]
+"84
+[v _dezena `uc ~T0 @X0 1 a ]
+[; ;lcd.c: 84: uint8_t dezena = (tensao%100);
+[e = _dezena -> % _tensao -> -> 100 `i `ui `uc ]
+[; ;lcd.c: 85: dezena = dezena/10;
+"85
+[e = _dezena -> / -> _dezena `i -> 10 `i `uc ]
+"87
+[v _unidade `uc ~T0 @X0 1 a ]
+[; ;lcd.c: 87: uint8_t unidade = (tensao%10);
+[e = _unidade -> % _tensao -> -> 10 `i `ui `uc ]
+[; ;lcd.c: 89: lcd_set_position(1,0);
+"89
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;lcd.c: 90: lcd_data(milhar+0x30);
+"90
+[e ( _lcd_data (1 -> + _milhar -> -> 48 `i `ui `uc ]
+[; ;lcd.c: 92: lcd_set_position(1,1);
+"92
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;lcd.c: 93: lcd_data('.');
+"93
+[e ( _lcd_data (1 -> -> 46 `ui `uc ]
+[; ;lcd.c: 95: lcd_set_position(1,2);
+"95
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 2 `i `uc ]
+[; ;lcd.c: 96: lcd_data(centena +0x30);
+"96
+[e ( _lcd_data (1 -> + _centena -> -> 48 `i `ui `uc ]
+[; ;lcd.c: 98: lcd_set_position(1,3);
+"98
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 3 `i `uc ]
+[; ;lcd.c: 99: lcd_data(dezena+0x30);
+"99
+[e ( _lcd_data (1 -> + -> _dezena `i -> 48 `i `uc ]
+[; ;lcd.c: 101: lcd_set_position(1,4);
+"101
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 4 `i `uc ]
+[; ;lcd.c: 102: lcd_data(unidade+0x30);
+"102
+[e ( _lcd_data (1 -> + -> _unidade `i -> 48 `i `uc ]
+[; ;lcd.c: 104: lcd_set_position(1,5);
+"104
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 5 `i `uc ]
+[; ;lcd.c: 105: lcd_data('V');
+"105
+[e ( _lcd_data (1 -> -> 86 `ui `uc ]
+[; ;lcd.c: 108: return 0;
+"108
+[e ) -> -> 0 `i `uc ]
+[e $UE 144  ]
+[; ;lcd.c: 113: }
+"113
+[e :UE 144 ]
+}

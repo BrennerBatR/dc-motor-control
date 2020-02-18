@@ -75,3 +75,39 @@ uint8_t lcd_set_position(uint8_t x, uint8_t y)
 }
 
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
+
+
+uint8_t lcd_tensao(uint16_t tensao){
+	uint16_t milhar = tensao/1000;
+	uint16_t centena = (tensao%1000);
+	centena = centena/100;
+	uint8_t dezena = (tensao%100);
+	dezena = dezena/10;
+	
+	uint8_t unidade = (tensao%10);
+	
+	lcd_set_position(1,0);
+    lcd_data(milhar+0x30);
+    
+    lcd_set_position(1,1);
+    lcd_data('.');
+    
+    lcd_set_position(1,2);
+    lcd_data(centena +0x30);
+    
+    lcd_set_position(1,3);
+    lcd_data(dezena+0x30);
+    
+    lcd_set_position(1,4);
+    lcd_data(unidade+0x30);
+    
+    lcd_set_position(1,5);
+    lcd_data('V');
+    
+    
+    return 0;
+	
+	
+	
+		
+}

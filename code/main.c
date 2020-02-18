@@ -4,7 +4,7 @@
 #define  _XTAL_FREQ 4000000
 // globais
 uint16_t valor = 0;
-float	valor_f = 0;
+
 
 
 void main(void) {
@@ -24,8 +24,7 @@ void main(void) {
     lcd_init();
     lcd_data(0x30);
 
-    lcd_set_position(1,15);
-    lcd_data('A');
+   
 	
 		//config do pwm
    	//ccp1con, intcon, pr2
@@ -42,6 +41,7 @@ void main(void) {
 		while( ADCON0 & (1<<1));
 		valor = (ADRESH<<8) + ADRESL;
 		valor = valor*5;
+		lcd_tensao(valor);
 		if (valor > 2000){
 			PORTD |= (1<<0); //set RD0
 		} else {

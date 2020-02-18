@@ -2211,10 +2211,11 @@ uint8_t lcd_cmd(uint8_t cmd);
 uint8_t lcd_data(uint8_t data);
 uint8_t lcd_set_position(uint8_t x, uint8_t y);
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
+uint8_t lcd_tensao(uint16_t tensao);
 
 # 6 "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c"
 uint16_t valor = 0;
-float valor_f = 0;
+
 
 
 void main(void) {
@@ -2234,11 +2235,7 @@ _delay((unsigned long)((20)*(4000000/4000.0)));
 lcd_init();
 lcd_data(0x30);
 
-lcd_set_position(1,15);
-lcd_data('A');
-
-
-
+# 31
 TRISC &= ~(1<<2);
 T2CON = 0B00000101;
 PR2 = 249;
@@ -2252,6 +2249,7 @@ ADCON0 |= (1<<1);
 while( ADCON0 & (1<<1));
 valor = (ADRESH<<8) + ADRESL;
 valor = valor*5;
+lcd_tensao(valor);
 if (valor > 2000){
 PORTD |= (1<<0);
 } else {

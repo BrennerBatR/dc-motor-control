@@ -3,10 +3,16 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 6 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\pic\eeprom.c
@@ -21,6 +27,8 @@
 [v _lcd_data lcd_data `(uc  1 e 1 0 ]
 "59
 [v _lcd_set_position lcd_set_position `(uc  1 e 1 0 ]
+"80
+[v _lcd_tensao lcd_tensao `(uc  1 e 1 0 ]
 "10 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c
 [v _main main `(v  1 e 1 0 ]
 "226 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
@@ -62,7 +70,22 @@
 {
 "52
 } 0
-"59 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
+"80 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
+[v _lcd_tensao lcd_tensao `(uc  1 e 1 0 ]
+{
+"82
+[v lcd_tensao@centena centena `ui  1 a 2 3 ]
+"81
+[v lcd_tensao@milhar milhar `ui  1 a 2 0 ]
+"84
+[v lcd_tensao@dezena dezena `uc  1 a 1 5 ]
+"87
+[v lcd_tensao@unidade unidade `uc  1 a 1 2 ]
+"80
+[v lcd_tensao@tensao tensao `ui  1 p 2 9 ]
+"113
+} 0
+"59
 [v _lcd_set_position lcd_set_position `(uc  1 e 1 0 ]
 {
 [v lcd_set_position@x x `uc  1 a 1 wreg ]
@@ -74,20 +97,6 @@
 "61
 [v lcd_set_position@x x `uc  1 a 1 5 ]
 "75
-} 0
-"3
-[v _lcd_init lcd_init `(uc  1 e 1 0 ]
-{
-"17
-} 0
-"21
-[v _lcd_cmd lcd_cmd `(uc  1 e 1 0 ]
-{
-[v lcd_cmd@cmd cmd `uc  1 a 1 wreg ]
-[v lcd_cmd@cmd cmd `uc  1 a 1 wreg ]
-"23
-[v lcd_cmd@cmd cmd `uc  1 a 1 2 ]
-"32
 } 0
 "33
 [v _lcd_data lcd_data `(uc  1 e 1 0 ]
@@ -102,6 +111,55 @@
 "38
 [v lcd_data@data data `uc  1 a 1 4 ]
 "58
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwmod@counter counter `uc  1 a 1 5 ]
+"6
+[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+"26
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+"6
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
+"31
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"42
+} 0
+"3 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
+[v _lcd_init lcd_init `(uc  1 e 1 0 ]
+{
+"17
+} 0
+"21
+[v _lcd_cmd lcd_cmd `(uc  1 e 1 0 ]
+{
+[v lcd_cmd@cmd cmd `uc  1 a 1 wreg ]
+[v lcd_cmd@cmd cmd `uc  1 a 1 wreg ]
+"23
+[v lcd_cmd@cmd cmd `uc  1 a 1 2 ]
+"32
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
