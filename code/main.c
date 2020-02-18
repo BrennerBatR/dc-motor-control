@@ -24,8 +24,17 @@ void main(void) {
     lcd_init();
     lcd_data(0x30);
 
-    lcd_set_position(0,15);
+    lcd_set_position(1,15);
     lcd_data('A');
+	
+		//config do pwm
+   	//ccp1con, intcon, pr2
+   	TRISC &= ~(1<<2);
+   	T2CON = 0B00000101;	//TRM2CON=1  PRESCALER= 4
+   	PR2 = 249;
+   	CCP1CON = 0B00001100; //<5:4> os 2 menos significativos do 500 PWM SINGLE OUTPUT ,PWM MODE pag 127
+   	CCPR1L = 500 >>2; // pegando os 8 bits mais significativos e armazenando
+   	
 	
 	while(1){
 		// loop infinito

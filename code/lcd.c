@@ -7,7 +7,7 @@ uint8_t lcd_init(void)
 	ANSELH = 0x00;
 	lcd_cmd(0x02);
 	lcd_cmd(0x02);
-	lcd_cmd(0x00);
+	lcd_cmd(0x08);
 	lcd_cmd(0x00);
 	lcd_cmd(0x0C);
 	lcd_cmd(0x00);

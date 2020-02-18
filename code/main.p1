@@ -16,13 +16,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "153 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic.h
 [v __delay `JF1637 ~T0 @X0 0 e ]
 [p i __delay ]
-"10 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.h
+"10 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.h
 [v _lcd_init `(uc ~T0 @X0 0 ef ]
 "13
 [v _lcd_data `(uc ~T0 @X0 0 ef1`uc ]
 "14
 [v _lcd_set_position `(uc ~T0 @X0 0 ef2`uc`uc ]
-"1236 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
+"770 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
+[v _T2CON `Vuc ~T0 @X0 0 e@18 ]
+"2039
+[v _PR2 `Vuc ~T0 @X0 0 e@146 ]
+"939
+[v _CCP1CON `Vuc ~T0 @X0 0 e@23 ]
+"925
+[v _CCPR1L `Vuc ~T0 @X0 0 e@21 ]
+"1236
 [v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
 "2968
 [v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
@@ -1546,7 +1554,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 13: uint8_t lcd_data(uint8_t data);
 [; ;lcd.h: 14: uint8_t lcd_set_position(uint8_t x, uint8_t y);
 [; ;lcd.h: 15: uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
-"6 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"6 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c
 [v _valor `ui ~T0 @X0 1 e ]
 [i _valor
 -> -> 0 `i `ui
@@ -1598,63 +1606,78 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 25: lcd_data(0x30);
 "25
 [e ( _lcd_data (1 -> -> 48 `i `uc ]
-[; ;main.c: 27: lcd_set_position(0,15);
+[; ;main.c: 27: lcd_set_position(1,15);
 "27
-[e ( _lcd_set_position (2 , -> -> 0 `i `uc -> -> 15 `i `uc ]
+[e ( _lcd_set_position (2 , -> -> 1 `i `uc -> -> 15 `i `uc ]
 [; ;main.c: 28: lcd_data('A');
 "28
 [e ( _lcd_data (1 -> -> 65 `ui `uc ]
-[; ;main.c: 30: while(1){
-"30
+[; ;main.c: 32: TRISC &= ~(1<<2);
+"32
+[e =& _TRISC -> ~ << -> 1 `i -> 2 `i `uc ]
+[; ;main.c: 33: T2CON = 0B00000101;
+"33
+[e = _T2CON -> -> 5 `i `uc ]
+[; ;main.c: 34: PR2 = 249;
+"34
+[e = _PR2 -> -> 249 `i `uc ]
+[; ;main.c: 35: CCP1CON = 0B00001100;
+"35
+[e = _CCP1CON -> -> 12 `i `uc ]
+[; ;main.c: 36: CCPR1L = 500 >>2;
+"36
+[e = _CCPR1L -> >> -> 500 `i -> 2 `i `uc ]
+[; ;main.c: 39: while(1){
+"39
 [e :U 140 ]
 {
-[; ;main.c: 32: ADCON0 |= (1<<1);
-"32
+[; ;main.c: 41: ADCON0 |= (1<<1);
+"41
 [e =| _ADCON0 -> << -> 1 `i -> 1 `i `uc ]
-[; ;main.c: 33: while( ADCON0 & (1<<1));
-"33
+[; ;main.c: 42: while( ADCON0 & (1<<1));
+"42
 [e $U 142  ]
 [e :U 143 ]
 [e :U 142 ]
 [e $ != & -> _ADCON0 `i << -> 1 `i -> 1 `i -> 0 `i 143  ]
 [e :U 144 ]
-[; ;main.c: 34: valor = (ADRESH<<8) + ADRESL;
-"34
+[; ;main.c: 43: valor = (ADRESH<<8) + ADRESL;
+"43
 [e = _valor -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
-[; ;main.c: 35: valor = valor*5;
-"35
+[; ;main.c: 44: valor = valor*5;
+"44
 [e = _valor * _valor -> -> 5 `i `ui ]
-[; ;main.c: 36: if (valor > 2000){
-"36
+[; ;main.c: 45: if (valor > 2000){
+"45
 [e $ ! > _valor -> -> 2000 `i `ui 145  ]
 {
-[; ;main.c: 37: PORTD |= (1<<0);
-"37
+[; ;main.c: 46: PORTD |= (1<<0);
+"46
 [e =| _PORTD -> << -> 1 `i -> 0 `i `uc ]
-"38
+"47
 }
-[; ;main.c: 38: } else {
+[; ;main.c: 47: } else {
 [e $U 146  ]
 [e :U 145 ]
 {
-[; ;main.c: 39: PORTD &= ~(1<<0);
-"39
+[; ;main.c: 48: PORTD &= ~(1<<0);
+"48
 [e =& _PORTD -> ~ << -> 1 `i -> 0 `i `uc ]
-"40
+"49
 }
 [e :U 146 ]
-[; ;main.c: 40: }
-[; ;main.c: 41: _delay((unsigned long)((5)*(4000000/4000000.0)));
-"41
+[; ;main.c: 49: }
+[; ;main.c: 50: _delay((unsigned long)((5)*(4000000/4000000.0)));
+"50
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
-"42
+"51
 }
 [e :U 139 ]
-"30
+"39
 [e $U 140  ]
 [e :U 141 ]
-[; ;main.c: 42: }
-[; ;main.c: 43: }
-"43
+[; ;main.c: 51: }
+[; ;main.c: 52: }
+"52
 [e :UE 138 ]
 }

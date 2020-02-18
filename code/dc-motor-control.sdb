@@ -13,7 +13,7 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"3 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c
+"3 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
 [v _lcd_init lcd_init `(uc  1 e 1 0 ]
 "21
 [v _lcd_cmd lcd_cmd `(uc  1 e 1 0 ]
@@ -21,12 +21,18 @@
 [v _lcd_data lcd_data `(uc  1 e 1 0 ]
 "59
 [v _lcd_set_position lcd_set_position `(uc  1 e 1 0 ]
-"10 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"10 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c
 [v _main main `(v  1 e 1 0 ]
 "226 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "350
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"770
+[v _T2CON T2CON `VEuc  1 e 1 @18 ]
+"925
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @21 ]
+"939
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @23 ]
 "1236
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
 "1243
@@ -39,6 +45,8 @@
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1600
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"2039
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
 "2968
 [v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
 "2975
@@ -47,14 +55,14 @@
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3447
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
-"6 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c
+"6 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c
 [v _valor valor `ui  1 e 2 0 ]
 "10
 [v _main main `(v  1 e 1 0 ]
 {
-"43
+"52
 } 0
-"59 C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c
+"59 C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c
 [v _lcd_set_position lcd_set_position `(uc  1 e 1 0 ]
 {
 [v lcd_set_position@x x `uc  1 a 1 wreg ]

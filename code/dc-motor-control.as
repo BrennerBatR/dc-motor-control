@@ -356,12 +356,20 @@ _PORTB	set	0x6
 _PORTD	set	0x8
 	global	_ADRESH
 _ADRESH	set	0x1E
+	global	_CCPR1L
+_CCPR1L	set	0x15
+	global	_CCP1CON
+_CCP1CON	set	0x17
+	global	_T2CON
+_T2CON	set	0x12
 	global	_ADCON0
 _ADCON0	set	0x1F
 	global	_TRISB
 _TRISB	set	0x86
 	global	_ADRESL
 _ADRESL	set	0x9E
+	global	_PR2
+_PR2	set	0x92
 	global	_TRISC
 _TRISC	set	0x87
 	global	_TRISD
@@ -590,7 +598,7 @@ lcd_set_position@pos:	; 1 bytes @ 0x6
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 10 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+;;		line 10 in file "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -620,12 +628,12 @@ lcd_set_position@pos:	; 1 bytes @ 0x6
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1,group=0
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c"
 	line	10
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\main.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\main.c"
 	line	10
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -636,7 +644,7 @@ _main:
 ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
 	line	13
 	
-l703:	
+l713:	
 ;main.c: 13: TRISA |= (1<<0);
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
@@ -648,14 +656,14 @@ l703:
 	bsf	(392)^0180h+(0/8),(0)&7	;volatile
 	line	16
 	
-l705:	
+l715:	
 ;main.c: 16: ADCON0 = 0x00;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(31)	;volatile
 	line	17
 	
-l707:	
+l717:	
 ;main.c: 17: ADCON0 |= 0b01000001;
 	movlw	low(041h)
 	movwf	(??_main+0)+0
@@ -663,29 +671,29 @@ l707:
 	iorwf	(31),f	;volatile
 	line	19
 	
-l709:	
+l719:	
 ;main.c: 19: ADCON1 = 0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(159)^080h	;volatile
 	line	20
 	
-l711:	
+l721:	
 ;main.c: 20: ADCON1 |= (1<<7);
 	bsf	(159)^080h+(7/8),(7)&7	;volatile
 	line	21
 	
-l713:	
+l723:	
 ;main.c: 21: TRISD = 0;
 	clrf	(136)^080h	;volatile
 	line	22
 	
-l715:	
+l725:	
 ;main.c: 22: TRISC = 0;
 	clrf	(135)^080h	;volatile
 	line	23
 	
-l717:	
+l727:	
 ;main.c: 23: _delay((unsigned long)((20)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -703,73 +711,105 @@ opt asmopt_pop
 
 	line	24
 	
-l719:	
+l729:	
 ;main.c: 24: lcd_init();
 	fcall	_lcd_init
 	line	25
 	
-l721:	
+l731:	
 ;main.c: 25: lcd_data(0x30);
 	movlw	low(030h)
 	fcall	_lcd_data
 	line	27
 	
-l723:	
-;main.c: 27: lcd_set_position(0,15);
+l733:	
+;main.c: 27: lcd_set_position(1,15);
 	movlw	low(0Fh)
 	movwf	(??_main+0)+0
 	movf	(??_main+0)+0,w
 	movwf	(lcd_set_position@y)
-	movlw	low(0)
+	movlw	low(01h)
 	fcall	_lcd_set_position
 	line	28
 	
-l725:	
+l735:	
 ;main.c: 28: lcd_data('A');
 	movlw	low(041h)
 	fcall	_lcd_data
-	goto	l727
-	line	30
-;main.c: 30: while(1){
-	
-l35:	
 	line	32
 	
-l727:	
-;main.c: 32: ADCON0 |= (1<<1);
+l737:	
+;main.c: 32: TRISC &= ~(1<<2);
+	movlw	low(0FBh)
+	movwf	(??_main+0)+0
+	movf	(??_main+0)+0,w
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	andwf	(135)^080h,f	;volatile
+	line	33
+;main.c: 33: T2CON = 0B00000101;
+	movlw	low(05h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(18)	;volatile
+	line	34
+;main.c: 34: PR2 = 249;
+	movlw	low(0F9h)
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	movwf	(146)^080h	;volatile
+	line	35
+;main.c: 35: CCP1CON = 0B00001100;
+	movlw	low(0Ch)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(23)	;volatile
+	line	36
+;main.c: 36: CCPR1L = 500 >>2;
+	movlw	low(07Dh)
+	movwf	(21)	;volatile
+	goto	l739
+	line	39
+;main.c: 39: while(1){
+	
+l43:	
+	line	41
+	
+l739:	
+;main.c: 41: ADCON0 |= (1<<1);
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(31)+(1/8),(1)&7	;volatile
-	line	33
-;main.c: 33: while( ADCON0 & (1<<1));
-	goto	l36
+	line	42
+;main.c: 42: while( ADCON0 & (1<<1));
+	goto	l44
 	
-l37:	
+l45:	
 	
-l36:	
+l44:	
 	btfsc	(31),(1)&7	;volatile
 	goto	u181
 	goto	u180
 u181:
-	goto	l36
+	goto	l44
 u180:
-	goto	l729
+	goto	l741
 	
-l38:	
-	line	34
+l46:	
+	line	43
 	
-l729:	
-;main.c: 34: valor = (ADRESH<<8) + ADRESL;
+l741:	
+;main.c: 43: valor = (ADRESH<<8) + ADRESL;
 	movf	(30),w	;volatile
 	movwf	(_valor+1)
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movf	(158)^080h,w	;volatile
 	movwf	(_valor)
-	line	35
+	line	44
 	
-l731:	
-;main.c: 35: valor = valor*5;
+l743:	
+;main.c: 44: valor = valor*5;
 	movf	(_valor+1),w
 	movwf	(___wmul@multiplier+1)
 	movf	(_valor),w
@@ -783,10 +823,10 @@ l731:
 	movwf	(_valor+1)
 	movf	(0+(?___wmul)),w
 	movwf	(_valor)
-	line	36
+	line	45
 	
-l733:	
-;main.c: 36: if (valor > 2000){
+l745:	
+;main.c: 45: if (valor > 2000){
 	movlw	07h
 	subwf	(_valor+1),w
 	movlw	0D1h
@@ -796,39 +836,39 @@ l733:
 	goto	u191
 	goto	u190
 u191:
-	goto	l737
+	goto	l749
 u190:
-	line	37
+	line	46
 	
-l735:	
-;main.c: 37: PORTD |= (1<<0);
+l747:	
+;main.c: 46: PORTD |= (1<<0);
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(8)+(0/8),(0)&7	;volatile
-	line	38
-;main.c: 38: } else {
-	goto	l739
+	line	47
+;main.c: 47: } else {
+	goto	l751
 	
-l39:	
-	line	39
+l47:	
+	line	48
 	
-l737:	
-;main.c: 39: PORTD &= ~(1<<0);
+l749:	
+;main.c: 48: PORTD &= ~(1<<0);
 	movlw	low(0FEh)
 	movwf	(??_main+0)+0
 	movf	(??_main+0)+0,w
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	andwf	(8),f	;volatile
-	goto	l739
-	line	40
+	goto	l751
+	line	49
 	
-l40:	
-	line	41
+l48:	
+	line	50
 	
-l739:	
-;main.c: 40: }
-;main.c: 41: _delay((unsigned long)((5)*(4000000/4000000.0)));
+l751:	
+;main.c: 49: }
+;main.c: 50: _delay((unsigned long)((5)*(4000000/4000000.0)));
 		opt asmopt_push
 	opt asmopt_off
 	nop2	;2 cycle nop
@@ -836,17 +876,17 @@ l739:
 	nop
 	opt asmopt_pop
 
-	goto	l727
-	line	42
+	goto	l739
+	line	51
 	
-l41:	
-	line	30
-	goto	l727
+l49:	
+	line	39
+	goto	l739
 	
-l42:	
-	line	43
+l50:	
+	line	52
 	
-l43:	
+l51:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -857,7 +897,7 @@ GLOBAL	__end_of_main
 
 ;; *************** function _lcd_set_position *****************
 ;; Defined at:
-;;		line 59 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+;;		line 59 in file "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  x               1    wreg     unsigned char 
 ;;  y               1    3[COMMON] unsigned char 
@@ -887,12 +927,12 @@ GLOBAL	__end_of_main
 ;; This function uses a non-reentrant model
 ;;
 psect	text1,local,class=CODE,delta=2,merge=1,group=0
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 	line	59
 global __ptext1
 __ptext1:	;psect for function _lcd_set_position
 psect	text1
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 	line	59
 	global	__size_of_lcd_set_position
 	__size_of_lcd_set_position	equ	__end_of_lcd_set_position-_lcd_set_position
@@ -905,23 +945,23 @@ _lcd_set_position:
 	movwf	(lcd_set_position@x)
 	line	61
 	
-l667:	
+l677:	
 ;lcd.c: 61: uint8_t pos = 0;
 	clrf	(lcd_set_position@pos)
 	line	62
 	
-l669:	
+l679:	
 ;lcd.c: 62: if ( x == 0 ){
 	movf	((lcd_set_position@x)),w
 	btfss	status,2
 	goto	u111
 	goto	u110
 u111:
-	goto	l679
+	goto	l689
 u110:
 	line	63
 	
-l671:	
+l681:	
 ;lcd.c: 63: pos = y;
 	movf	(lcd_set_position@y),w
 	movwf	(??_lcd_set_position+0)+0
@@ -929,12 +969,12 @@ l671:
 	movwf	(lcd_set_position@pos)
 	line	64
 	
-l673:	
+l683:	
 ;lcd.c: 64: pos |= (1<<7);
 	bsf	(lcd_set_position@pos)+(7/8),(7)&7
 	line	65
 	
-l675:	
+l685:	
 ;lcd.c: 65: lcd_cmd((pos>>4)&0x0F);
 	movf	(lcd_set_position@pos),w
 	movwf	(??_lcd_set_position+0)+0
@@ -950,19 +990,19 @@ u125:
 	fcall	_lcd_cmd
 	line	66
 	
-l677:	
+l687:	
 ;lcd.c: 66: lcd_cmd(pos & 0x0F);
 	movf	(lcd_set_position@pos),w
 	andlw	0Fh
 	fcall	_lcd_cmd
 	line	67
 ;lcd.c: 67: } else {
-	goto	l69
+	goto	l77
 	
-l67:	
+l75:	
 	line	68
 	
-l679:	
+l689:	
 ;lcd.c: 68: pos = y;
 	movf	(lcd_set_position@y),w
 	movwf	(??_lcd_set_position+0)+0
@@ -970,7 +1010,7 @@ l679:
 	movwf	(lcd_set_position@pos)
 	line	69
 	
-l681:	
+l691:	
 ;lcd.c: 69: pos | = (0xC0);
 	movlw	low(0C0h)
 	movwf	(??_lcd_set_position+0)+0
@@ -978,7 +1018,7 @@ l681:
 	iorwf	(lcd_set_position@pos),f
 	line	70
 	
-l683:	
+l693:	
 ;lcd.c: 70: lcd_cmd((pos>>4)&0x0F);
 	movf	(lcd_set_position@pos),w
 	movwf	(??_lcd_set_position+0)+0
@@ -994,25 +1034,25 @@ u135:
 	fcall	_lcd_cmd
 	line	71
 	
-l685:	
+l695:	
 ;lcd.c: 71: lcd_cmd(pos & 0x0F);
 	movf	(lcd_set_position@pos),w
 	andlw	0Fh
 	fcall	_lcd_cmd
-	goto	l69
+	goto	l77
 	line	72
 	
-l68:	
-	goto	l69
+l76:	
+	goto	l77
 	line	73
 	
-l687:	
+l697:	
 	line	75
 ;lcd.c: 72: }
 ;lcd.c: 73: return 0;
 ;	Return value of _lcd_set_position is never used
 	
-l69:	
+l77:	
 	return
 	opt stack 0
 GLOBAL	__end_of_lcd_set_position
@@ -1022,7 +1062,7 @@ GLOBAL	__end_of_lcd_set_position
 
 ;; *************** function _lcd_init *****************
 ;; Defined at:
-;;		line 3 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+;;		line 3 in file "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1054,7 +1094,7 @@ psect	text2,local,class=CODE,delta=2,merge=1,group=0
 global __ptext2
 __ptext2:	;psect for function _lcd_init
 psect	text2
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 	line	3
 	global	__size_of_lcd_init
 	__size_of_lcd_init	equ	__end_of_lcd_init-_lcd_init
@@ -1065,7 +1105,7 @@ _lcd_init:
 ; Regs used in _lcd_init: [wreg+status,2+status,0+pclath+cstack]
 	line	5
 	
-l541:	
+l549:	
 ;lcd.c: 5: _delay((unsigned long)((40)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1083,69 +1123,69 @@ opt asmopt_pop
 
 	line	6
 	
-l543:	
+l551:	
 ;lcd.c: 6: TRISB = 0x00;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(134)^080h	;volatile
 	line	7
 	
-l545:	
+l553:	
 ;lcd.c: 7: ANSELH = 0x00;
 	bsf	status, 5	;RP0=1, select bank3
 	bsf	status, 6	;RP1=1, select bank3
 	clrf	(393)^0180h	;volatile
 	line	8
 	
-l547:	
+l555:	
 ;lcd.c: 8: lcd_cmd(0x02);
 	movlw	low(02h)
 	fcall	_lcd_cmd
 	line	9
 	
-l549:	
+l557:	
 ;lcd.c: 9: lcd_cmd(0x02);
 	movlw	low(02h)
 	fcall	_lcd_cmd
 	line	10
 	
-l551:	
-;lcd.c: 10: lcd_cmd(0x00);
-	movlw	low(0)
+l559:	
+;lcd.c: 10: lcd_cmd(0x08);
+	movlw	low(08h)
 	fcall	_lcd_cmd
 	line	11
 	
-l553:	
+l561:	
 ;lcd.c: 11: lcd_cmd(0x00);
 	movlw	low(0)
 	fcall	_lcd_cmd
 	line	12
 	
-l555:	
+l563:	
 ;lcd.c: 12: lcd_cmd(0x0C);
 	movlw	low(0Ch)
 	fcall	_lcd_cmd
 	line	13
 	
-l557:	
+l565:	
 ;lcd.c: 13: lcd_cmd(0x00);
 	movlw	low(0)
 	fcall	_lcd_cmd
 	line	14
 	
-l559:	
+l567:	
 ;lcd.c: 14: lcd_cmd(0x06);
 	movlw	low(06h)
 	fcall	_lcd_cmd
-	goto	l58
+	goto	l66
 	line	16
 	
-l561:	
+l569:	
 	line	17
 ;lcd.c: 16: return 0;
 ;	Return value of _lcd_init is never used
 	
-l58:	
+l66:	
 	return
 	opt stack 0
 GLOBAL	__end_of_lcd_init
@@ -1155,7 +1195,7 @@ GLOBAL	__end_of_lcd_init
 
 ;; *************** function _lcd_cmd *****************
 ;; Defined at:
-;;		line 21 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+;;		line 21 in file "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  cmd             1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -1187,7 +1227,7 @@ psect	text3,local,class=CODE,delta=2,merge=1,group=0
 global __ptext3
 __ptext3:	;psect for function _lcd_cmd
 psect	text3
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 	line	21
 	global	__size_of_lcd_cmd
 	__size_of_lcd_cmd	equ	__end_of_lcd_cmd-_lcd_cmd
@@ -1200,7 +1240,7 @@ _lcd_cmd:
 	movwf	(lcd_cmd@cmd)
 	line	23
 	
-l529:	
+l537:	
 ;lcd.c: 23: PORTB = cmd;
 	movf	(lcd_cmd@cmd),w
 	bcf	status, 5	;RP0=0, select bank0
@@ -1208,7 +1248,7 @@ l529:
 	movwf	(6)	;volatile
 	line	24
 	
-l531:	
+l539:	
 ;lcd.c: 24: PORTB &= ~(1<<4);
 	movlw	low(0EFh)
 	movwf	(??_lcd_cmd+0)+0
@@ -1216,12 +1256,12 @@ l531:
 	andwf	(6),f	;volatile
 	line	25
 	
-l533:	
+l541:	
 ;lcd.c: 25: PORTB |= (1<<5);
 	bsf	(6)+(5/8),(5)&7	;volatile
 	line	26
 	
-l535:	
+l543:	
 ;lcd.c: 26: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1247,7 +1287,7 @@ opt asmopt_pop
 	andwf	(6),f	;volatile
 	line	28
 	
-l537:	
+l545:	
 ;lcd.c: 28: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1263,15 +1303,15 @@ decfsz	((??_lcd_cmd+0)+0),f
 	nop2
 opt asmopt_pop
 
-	goto	l61
+	goto	l69
 	line	29
 	
-l539:	
+l547:	
 	line	32
 ;lcd.c: 29: return 0;
 ;	Return value of _lcd_cmd is never used
 	
-l61:	
+l69:	
 	return
 	opt stack 0
 GLOBAL	__end_of_lcd_cmd
@@ -1281,7 +1321,7 @@ GLOBAL	__end_of_lcd_cmd
 
 ;; *************** function _lcd_data *****************
 ;; Defined at:
-;;		line 33 in file "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+;;		line 33 in file "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  data            1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -1314,7 +1354,7 @@ psect	text4,local,class=CODE,delta=2,merge=1,group=0
 global __ptext4
 __ptext4:	;psect for function _lcd_data
 psect	text4
-	file	"C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+	file	"C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 	line	33
 	global	__size_of_lcd_data
 	__size_of_lcd_data	equ	__end_of_lcd_data-_lcd_data
@@ -1327,7 +1367,7 @@ _lcd_data:
 	movwf	(lcd_data@data)
 	line	38
 	
-l563:	
+l571:	
 ;lcd.c: 35: uint8_t high_nibble;
 ;lcd.c: 36: uint8_t low_nibble;
 ;lcd.c: 38: high_nibble = data >> 4;
@@ -1352,7 +1392,7 @@ u15:
 	andwf	(lcd_data@high_nibble),f
 	line	41
 	
-l565:	
+l573:	
 ;lcd.c: 41: low_nibble = data & 0x0F;
 	movf	(lcd_data@data),w
 	andlw	0Fh
@@ -1361,7 +1401,7 @@ l565:
 	movwf	(lcd_data@low_nibble)
 	line	42
 	
-l567:	
+l575:	
 ;lcd.c: 42: PORTB = high_nibble;
 	movf	(lcd_data@high_nibble),w
 	bcf	status, 5	;RP0=0, select bank0
@@ -1369,17 +1409,17 @@ l567:
 	movwf	(6)	;volatile
 	line	43
 	
-l569:	
+l577:	
 ;lcd.c: 43: PORTB |= (1<<4);
 	bsf	(6)+(4/8),(4)&7	;volatile
 	line	44
 	
-l571:	
+l579:	
 ;lcd.c: 44: PORTB |= (1<<5);
 	bsf	(6)+(5/8),(5)&7	;volatile
 	line	45
 	
-l573:	
+l581:	
 ;lcd.c: 45: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1397,7 +1437,7 @@ opt asmopt_pop
 
 	line	46
 	
-l575:	
+l583:	
 ;lcd.c: 46: PORTB &= ~(1<<5);
 	movlw	low(0DFh)
 	movwf	(??_lcd_data+0)+0
@@ -1407,7 +1447,7 @@ l575:
 	andwf	(6),f	;volatile
 	line	47
 	
-l577:	
+l585:	
 ;lcd.c: 47: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1425,7 +1465,7 @@ opt asmopt_pop
 
 	line	49
 	
-l579:	
+l587:	
 ;lcd.c: 49: PORTB = low_nibble;
 	movf	(lcd_data@low_nibble),w
 	bcf	status, 5	;RP0=0, select bank0
@@ -1433,17 +1473,17 @@ l579:
 	movwf	(6)	;volatile
 	line	50
 	
-l581:	
+l589:	
 ;lcd.c: 50: PORTB |= (1<<4);
 	bsf	(6)+(4/8),(4)&7	;volatile
 	line	51
 	
-l583:	
+l591:	
 ;lcd.c: 51: PORTB |= (1<<5);
 	bsf	(6)+(5/8),(5)&7	;volatile
 	line	52
 	
-l585:	
+l593:	
 ;lcd.c: 52: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1461,7 +1501,7 @@ opt asmopt_pop
 
 	line	53
 	
-l587:	
+l595:	
 ;lcd.c: 53: PORTB &= ~(1<<5);
 	movlw	low(0DFh)
 	movwf	(??_lcd_data+0)+0
@@ -1471,7 +1511,7 @@ l587:
 	andwf	(6),f	;volatile
 	line	54
 	
-l589:	
+l597:	
 ;lcd.c: 54: _delay((unsigned long)((2)*(4000000/4000.0)));
 	opt asmopt_push
 opt asmopt_off
@@ -1487,15 +1527,15 @@ decfsz	((??_lcd_data+0)+0),f
 	nop2
 opt asmopt_pop
 
-	goto	l64
+	goto	l72
 	line	56
 	
-l591:	
+l599:	
 	line	58
 ;lcd.c: 56: return 0;
 ;	Return value of _lcd_data is never used
 	
-l64:	
+l72:	
 	return
 	opt stack 0
 GLOBAL	__end_of_lcd_data
@@ -1549,25 +1589,25 @@ ___wmul:
 ; Regs used in ___wmul: [wreg+status,2+status,0]
 	line	43
 	
-l689:	
+l699:	
 	clrf	(___wmul@product)
 	clrf	(___wmul@product+1)
-	goto	l691
+	goto	l701
 	line	44
 	
-l152:	
+l160:	
 	line	45
 	
-l691:	
+l701:	
 	btfss	(___wmul@multiplier),(0)&7
 	goto	u141
 	goto	u140
 u141:
-	goto	l153
+	goto	l161
 u140:
 	line	46
 	
-l693:	
+l703:	
 	movf	(___wmul@multiplicand),w
 	addwf	(___wmul@product),f
 	skipnc
@@ -1575,7 +1615,7 @@ l693:
 	movf	(___wmul@multiplicand+1),w
 	addwf	(___wmul@product+1),f
 	
-l153:	
+l161:	
 	line	47
 	movlw	01h
 	
@@ -1588,7 +1628,7 @@ u155:
 	goto	u155
 	line	48
 	
-l695:	
+l705:	
 	movlw	01h
 	
 u165:
@@ -1600,31 +1640,31 @@ u165:
 	goto	u165
 	line	49
 	
-l697:	
+l707:	
 	movf	((___wmul@multiplier)),w
 iorwf	((___wmul@multiplier+1)),w
 	btfss	status,2
 	goto	u171
 	goto	u170
 u171:
-	goto	l691
+	goto	l701
 u170:
-	goto	l699
+	goto	l709
 	
-l154:	
+l162:	
 	line	52
 	
-l699:	
+l709:	
 	movf	(___wmul@product+1),w
 	movwf	(?___wmul+1)
 	movf	(___wmul@product),w
 	movwf	(?___wmul)
-	goto	l155
+	goto	l163
 	
-l701:	
+l711:	
 	line	53
 	
-l155:	
+l163:	
 	return
 	opt stack 0
 GLOBAL	__end_of___wmul

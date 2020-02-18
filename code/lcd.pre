@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+# 1 "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -2204,7 +2204,7 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 10 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.h"
+# 10 "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.h"
 uint8_t lcd_init(void);
 uint8_t lcd_clear(void);
 uint8_t lcd_cmd(uint8_t cmd);
@@ -2212,7 +2212,7 @@ uint8_t lcd_data(uint8_t data);
 uint8_t lcd_set_position(uint8_t x, uint8_t y);
 uint8_t lcd_print_text(uint8_t x, uint8_t y, uint8_t* text);
 
-# 2 "C:\Users\PC-09\Desktop\PortableGit\ecai11\dc-motor-control\code\lcd.c"
+# 2 "C:\Users\Aluno\Desktop\PortableGit\ecai11\C\dc-motor-control\code\lcd.c"
 uint8_t pos = 0;
 uint8_t lcd_init(void)
 {
@@ -2221,7 +2221,7 @@ TRISB = 0x00;
 ANSELH = 0x00;
 lcd_cmd(0x02);
 lcd_cmd(0x02);
-lcd_cmd(0x00);
+lcd_cmd(0x08);
 lcd_cmd(0x00);
 lcd_cmd(0x0C);
 lcd_cmd(0x00);
